@@ -1,0 +1,37 @@
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #333;
+    overflow: hidden;
+    color: white;
+    width: 3rem;
+    border-radius: 20rem;
+    position: fixed; /* 位置を固定 */
+    top: 0; /* 上端から0 */
+    left: 0; /* 左端から0 */
+    z-index: 1000; /* 他の要素より前面に表示 */
+    margin: 2rem;
+  }
+  
+  .menu-button {
+    margin: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .menu-items a {
+    display: block;
+    margin: 0.5rem;
+    color: white;
+    text-decoration: none;
+  }
+  .HumburgerLogo{
+    width: 1.5rem ;
+    height: 1.5rem ;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    margin: 0.5rem;
+    align-self: center;
+    background-color: white;
+    border-radius: 2.5rem;
+  }
