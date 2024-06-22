@@ -14,18 +14,19 @@
     margin: 2rem;
   }
   
-  .menu-button {
+  .menu-container .menu-button {
     margin: 0.5rem;
     cursor: pointer;
+    width: 2rem ;
+    height: 2rem ;
+    min-width: 2rem;
+    min-height: 2rem;
   }
-  
-  .menu-items a {
-    display: block;
-    margin: 0.5rem;
-    color: white;
-    text-decoration: none;
+  .menu-container .menu-button:hover {
+    background-color: gray;
+    border-radius: 2rem;
   }
-  .HumburgerLogo{
+  .menu-container .HumburgerLogo{
     width: 1.5rem ;
     height: 1.5rem ;
     min-width: 1.5rem;
@@ -33,5 +34,19 @@
     margin: 0.5rem;
     align-self: center;
     background-color: white;
+    border-radius: 2.5rem;
+  }
+
+  .menu-container .menu-items .SideMenuImage{
+    width: 1.5rem ;
+    height: 1.5rem ;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    margin: 0.5rem;
+    align-self: center;
+    cursor: pointer;
+  }
+  .menu-container .menu-items .SideMenuImage:hover{
+    background-color: gray;
     border-radius: 2.5rem;
   }

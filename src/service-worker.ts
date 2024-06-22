@@ -86,7 +86,11 @@ self.addEventListener('install', function(event) {
         '/index.html',
         '/styles.css',
         '/script.js',
-        '/image.jpg',
+        '/logo.svg',
+        '/Image/NoteAdd.svg',
+        '/Common/Menu.css',
+        '/Image/Home.svg',
+        '/Image/EditNote.svg',
       ]);
     })
   );
