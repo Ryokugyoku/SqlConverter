@@ -77,4 +77,33 @@ self.addEventListener('message', (event) => {
   }
 });
 
+// キャッシュするためのリソースを追記する
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open('my-cache').then(function(cache) {
+      return cache.addAll([
+        '/',
+        '/index.html',
+        '/styles.css',
+        '/script.js',
+        '/image.jpg',
+      ]);
+    })
+  );
+});
+// キャッシュから読み込むように設定を行う
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        // キャッシュが見つかった場合、キャッシュのレスポンスを返す
+        if (response) {
+          return response;
+        }
+        // キャッシュが見つからない場合、ネットワークから取得する
+        return fetch(event.request);
+      }
+    )
+  );
+});
 // Any other custom service worker logic can go here.
