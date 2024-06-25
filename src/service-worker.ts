@@ -91,6 +91,7 @@ self.addEventListener('install', function(event) {
         '/Common/Menu.css',
         '/Image/Home.svg',
         '/Image/EditNote.svg',
+        '/Common/Home.css',
       ]);
     })
   );

@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Menu from './Common/Menu';
 import Home from './Common/Home';
+import CreateWiki from './Common/CreateWiki';
 
 function App() {
   
@@ -18,6 +19,8 @@ function App() {
       case 'Home':
         return <Home />;
       // 他のメニュー項目に応じたコンポーネントをここに追加
+      case 'NoteAdd':
+        return <CreateWiki />;
       default:
         return <p>選択されたメニュー項目に対応するコンポーネントがありません。</p>;
     }
