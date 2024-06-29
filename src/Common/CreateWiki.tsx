@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import './CreateWiki.css';
-interface Props {
+interface CreateWikiProps {
     // Define your component's props here
+    OnMenuClick:()=> void;
 }
 
-const CreateWiki: React.FC<Props> = () => {
+const CreateWiki: React.FC<CreateWikiProps> = (props) => {
     const [date] = useState(new Date().toISOString()); // 日付の状態
     const [text, setText] = useState(''); // テキストボックスの値の状態
     const [title, setTitle] = useState(''); // テキストボックスの値の状態
+    const [uploading] = useState(false); // アップロード中かどうかの状態
 
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
@@ -20,8 +22,44 @@ const CreateWiki: React.FC<Props> = () => {
     };
 
     const saveData = () => {
-        const dataToSave = { date, text, title};
-        localStorage.setItem('myData', JSON.stringify(dataToSave));
+        if(!text.trim() || !title.trim){
+            return;
+        }
+        
+        const dataToSave = { date, text, title, uploading};
+    
+        // IndexedDB データベースを開く
+        const request = window.indexedDB.open('myDatabase', 1);
+    
+        request.onerror = (event) => {
+            console.error('Database error:', event);
+        };
+    
+        request.onupgradeneeded = (event) => {
+            const db = request.result;
+            if (!db.objectStoreNames.contains('wikiData')) {
+                db.createObjectStore('wikiData', { keyPath: 'id', autoIncrement: true });
+            }
+        };
+    
+        request.onsuccess = (event) => {
+            const db = request.result;
+            const transaction = db.transaction('wikiData', 'readwrite');
+            const store = transaction.objectStore('wikiData');
+            const addRequest = store.add(dataToSave);
+    
+            addRequest.onsuccess = (event) => {
+                console.log('Data saved to the database', event);
+            };
+    
+            addRequest.onerror = (event) => {
+                console.error('Error saving data', event);
+            };
+
+            props.OnMenuClick();
+        };
+
+        
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

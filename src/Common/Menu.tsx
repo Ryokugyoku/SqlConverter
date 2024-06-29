@@ -12,6 +12,8 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick }) => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="menu-container" style={{ height: isOpen ? '14rem' : '5.5rem', transition: 'height 0.5s' }}>

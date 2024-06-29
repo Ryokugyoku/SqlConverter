@@ -14,13 +14,18 @@ function App() {
     setSelectedMenu(menuName);
     // 他のメニュー名に応じた処理も同様に追加可能
   };
+
+  const handleNoteAddClick = () => {
+    setSelectedMenu('Home');
+  };
+
   const renderContent = () => {
     switch (selectedMenu) {
       case 'Home':
         return <Home />;
       // 他のメニュー項目に応じたコンポーネントをここに追加
       case 'NoteAdd':
-        return <CreateWiki />;
+        return <CreateWiki OnMenuClick={handleNoteAddClick}/>;
       default:
         return <p>選択されたメニュー項目に対応するコンポーネントがありません。</p>;
     }
