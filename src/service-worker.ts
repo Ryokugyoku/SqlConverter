@@ -87,6 +87,10 @@ self.addEventListener('install', function(event) {
         '/styles.css',
         '/script.js',
         '/logo.svg',
+        '/locales/en/translate.json',
+        '/locales/ja/translate.json',
+        '/locales/es/translate.json',
+        '/electron.js',
       ]);
     })
   );

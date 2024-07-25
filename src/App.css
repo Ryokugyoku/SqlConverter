@@ -4,12 +4,16 @@
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* 標準構文 */
-
+  position: relative;
 }
 
 .App-logo {
+  z-index: 0; /* 他の要素より手前に表示 */
   height: 40vmin;
   pointer-events: none;
+  position: absolute; /* 絶対位置 */
+  transform: translate(-50%, -50%); /* 中央に配置 */
+  /* 必要に応じて他のプロパティを調整 */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -28,7 +32,69 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.Contents{
+  z-index: 1;
+  border: aqua solid 1px;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: rgba(40, 44, 52, 0.5);
+  color: white;
+  border-radius: 1rem;
+  box-shadow: 0 0 10rem rgba(0, 0, 0, 0.5)
 
+}
+.LangBox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+.LangBox label{
+  font-size: 1rem;
+  margin-right: 1vw;
+}
+
+.Options{
+  align-items: center;
+  border: aqua solid 1px;
+  background-color: rgba(250, 251, 252, 0.5);
+  color: white;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5)
+}
+.Options .Tab{
+  display: flex;
+  justify-content: center;
+  
+}
+.Options .Tab button{
+  background-color: rgba(40, 44, 52, 0.5);
+  font-size: 1.5rem;
+  color: white;
+  border: aqua solid 1px;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+.Options .Tab .left{
+  
+  border-radius: 0rem 1rem 1rem 0rem;
+}
+
+.Options .Tab .right{
+  border-radius: 1rem 0rem 0rem 1rem;
+}
+
+.Options .Tab button:hover{
+  background-color: rgba(40, 44, 52, 0.8);
+}
+
+.Options .Tab button:active{
+  background-color: rgba(2, 30, 87, 0.3);
+}
+
+.Options .Tab .Selected{
+  background-color: rgba(32, 42, 122, 0.3);
+}
 .App-link {
   color: #61dafb;
 }

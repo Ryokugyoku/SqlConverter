@@ -1,3 +1,7 @@
 {
-    "welcome": "SqlConverterProject 2024へようこそ"
+    "ApplicationTitle": "Sqlコンバーター",
+    "changeLanguage": "言語を変更",
+    "japanese":"日本語",
+    "english":"英語",
+    "espanol":"スペイン語"
 }
