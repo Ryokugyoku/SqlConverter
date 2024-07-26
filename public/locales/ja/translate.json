@@ -3,5 +3,8 @@
     "changeLanguage": "言語を変更",
     "japanese":"日本語",
     "english":"英語",
-    "espanol":"スペイン語"
+    "espanol":"スペイン語",
+    "csvsettings":"CSV設定",
+    "header":"ヘッダー情報",
+    "tableName":"テーブル名"
 }

@@ -3,5 +3,8 @@
     "changeLanguage": "Cambiar Language",
     "japanese":"Japones",
     "english":"English",
-    "espanol":"Español"
+    "espanol":"Español",
+    "csvsettings":"CSV Settings",
+    "header":"Header",
+    "tableName":"Table Name"
 }

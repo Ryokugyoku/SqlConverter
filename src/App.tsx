@@ -9,7 +9,9 @@ function App() {
 
   const csvButtonRef = useRef<HTMLButtonElement>(null);
   const sqlButtonRef = useRef<HTMLButtonElement>(null);
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const csvSettingsRef = useRef<HTMLDivElement>(null);
+
+  const handleFileCsvChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files) return;
 
@@ -30,11 +32,19 @@ function App() {
       csvButtonRef.current.classList.add('Selected');
       if (sqlButtonRef.current) {
         sqlButtonRef.current.classList.remove('Selected');
+        if (csvSettingsRef.current){
+          csvSettingsRef.current.style.display = 'flex';
+
+        }
+        
       }
     } else if (buttonId === 'SqlButton' && sqlButtonRef.current) {
       sqlButtonRef.current.classList.add('Selected');
       if (csvButtonRef.current) {
         csvButtonRef.current.classList.remove('Selected');
+        if (csvSettingsRef.current){
+          csvSettingsRef.current.style.display = 'none';
+        }
       }
     }
   };
@@ -58,7 +68,31 @@ function App() {
               <button className='right' id='CsvButton' ref={csvButtonRef} onClick={handleChangeTabColor}>{t('csv')}</button>
               <button className='left' id='SqlButton' ref={sqlButtonRef} onClick={handleChangeTabColor}>{t('sql')}</button>
             </div>
-            <input type="file" id="fileInput" accept=".csv,.sql" onChange={handleFileChange}/> 
+            <div className='CsvSettings' ref={csvSettingsRef} >
+              <label>{t('csvsettings')}</label>
+              <div className='settingBox'>
+                <div className='CsvSettingsBox'>
+                  <input type='checkbox' id='Header' />
+                  <label htmlFor='Header'>{t('header')}</label>
+                </div>
+                <div className='CsvSettingsBox'>
+                  <label>{t('tableName')} :</label>
+                  <input type='text' id='TableName' />
+                </div>
+                <div className='CsvSettingsBox'>
+                  <label>{t('dbtype')} :</label>
+                  <select>
+                    <option value='mysql'>MySQL</option>
+                    <option value='mssql'>MSSQL</option>
+                    <option value='oracle'>Oracle</option>
+                    <option value='postgresql'>PostgreSQL</option>
+                    <option value='sqlite'>SQLite</option>
+                  </select>
+                </div>
+              </div>
+              <input type="file" id="fileInput" accept=".csv" onChange={handleFileCsvChange}/> 
+            </div>
+            
           </div>
           
           <p>SqlConverterProject 2024</p>
