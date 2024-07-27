@@ -6,5 +6,6 @@
     "espanol":"Español",
     "csvsettings":"CSV Settings",
     "header":"Header",
-    "tableName":"Table Name"
+    "tableName":"Table Name",
+    "dbtype":"Database Type"
 }

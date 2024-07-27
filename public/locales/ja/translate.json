@@ -6,5 +6,6 @@
     "espanol":"スペイン語",
     "csvsettings":"CSV設定",
     "header":"ヘッダー情報",
-    "tableName":"テーブル名"
+    "tableName":"テーブル名",
+    "dbtype":"データベースの種類"
 }
