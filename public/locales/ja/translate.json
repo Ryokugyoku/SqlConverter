@@ -5,7 +5,8 @@
     "english":"英語",
     "espanol":"スペイン語",
     "csvsettings":"CSV設定",
-    "header":"ヘッダー情報",
+    "header":"ヘッダー情報あり",
     "tableName":"テーブル名",
-    "dbtype":"データベースの種類"
+    "dbtype":"データベースの種類",
+    "columnNamed":"列名"
 }

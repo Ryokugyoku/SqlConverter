@@ -1,8 +1,9 @@
-import React, { ChangeEvent, useRef } from 'react';
+import React, {ChangeEvent, useState, useRef } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import i18n from './locales/i18n';
 import { useTranslation } from 'react-i18next';
+import { handleFileCsvChange as originalHandleFileCsvChange ,ColumnsNum} from './csvUtils';
 
 function App() {
   const { t } = useTranslation();
@@ -10,19 +11,33 @@ function App() {
   const csvButtonRef = useRef<HTMLButtonElement>(null);
   const sqlButtonRef = useRef<HTMLButtonElement>(null);
   const csvSettingsRef = useRef<HTMLDivElement>(null);
+  const csvColumnSettingRef = useRef<HTMLDivElement>(null);
+  
+  const [numColumns, setNumColumns] = useState<number>(ColumnsNum);
 
-  const handleFileCsvChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (!files) return;
+  const handleFileCsvChange = (e: ChangeEvent<HTMLInputElement>) => {
+    originalHandleFileCsvChange(e);
+    setTimeout(() => {
+      setNumColumns(ColumnsNum); // ColumnsNumの値を設定
+      console.log(`numColumns set to: ${ColumnsNum}`); // ログを追加
+    }, 100); // 非同期処理のため少し待つ
+    if(csvColumnSettingRef.current){
+      const headerCheckbox = document.getElementById('HeaderCheckbox') as HTMLInputElement
+      if(!headerCheckbox.checked){ 
+        csvColumnSettingRef.current.style.display = '';
+      }
+    }
+  };
 
-    const file = files[0];
-    const reader = new FileReader();
-
-    reader.onload = (e: ProgressEvent<FileReader>) => {
-      console.log(e.target?.result);
-    };
-
-    reader.readAsText(file);
+  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const csvColumnSetting = document.getElementById('CsvColumnSetting');
+    if (csvColumnSetting) {
+      if (e.target.checked) {
+        csvColumnSetting.style.display = 'none';
+      } else {
+        csvColumnSetting.style.display = '';
+      }
+    }
   };
 
   const handleChangeTabColor = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -65,15 +80,22 @@ function App() {
           <h1>{t('ApplicationTitle')}</h1>
           <div className='Options'>
             <div className='Tab'>
-              <button className='right' id='CsvButton' ref={csvButtonRef} onClick={handleChangeTabColor}>{t('csv')}</button>
-              <button className='left' id='SqlButton' ref={sqlButtonRef} onClick={handleChangeTabColor}>{t('sql')}</button>
+              <button className='right' id='CsvButton' ref={csvButtonRef} onClick={handleChangeTabColor}>CSV</button>
+              <button className='left' id='SqlButton' ref={sqlButtonRef} onClick={handleChangeTabColor}>SQL</button>
             </div>
             <div className='CsvSettings' ref={csvSettingsRef} >
               <label>{t('csvsettings')}</label>
               <div className='settingBox'>
+                <input type="file" id="fileInput" accept=".csv" onChange={handleFileCsvChange}/> 
                 <div className='CsvSettingsBox'>
-                  <input type='checkbox' id='Header' />
+                  <input type='checkbox' id='HeaderCheckbox' onChange={handleCheckboxChange}/>
                   <label htmlFor='Header'>{t('header')}</label>
+                </div>
+                <div id='CsvColumnSetting' className='CsvSettingsBox' style={{display:'none'}} ref={csvColumnSettingRef}>          
+                  <label>{t('columnNamed')}</label>
+                  {Array.from({ length: numColumns }).map((_, index) => (
+                    <input key={index} type="text" placeholder={`Column ${index + 1}`} />
+                  ))}
                 </div>
                 <div className='CsvSettingsBox'>
                   <label>{t('tableName')} :</label>
@@ -90,7 +112,7 @@ function App() {
                   </select>
                 </div>
               </div>
-              <input type="file" id="fileInput" accept=".csv" onChange={handleFileCsvChange}/> 
+             
             </div>
             
           </div>

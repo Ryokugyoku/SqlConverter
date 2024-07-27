@@ -5,7 +5,8 @@
     "english":"English",
     "espanol":"Español",
     "csvsettings":"CSV Settings",
-    "header":"Header",
+    "header":"Header Informacion Incluido",
     "tableName":"Table Name",
-    "dbtype":"Database Type"
+    "dbtype":"Database Type",
+    "columnNamed":"Columns Name"
 }
