@@ -19,7 +19,6 @@ function App() {
     originalHandleFileCsvChange(e);
     setTimeout(() => {
       setNumColumns(ColumnsNum); // ColumnsNumの値を設定
-      console.log(`numColumns set to: ${ColumnsNum}`); // ログを追加
     }, 100); // 非同期処理のため少し待つ
     if(csvColumnSettingRef.current){
       const headerCheckbox = document.getElementById('HeaderCheckbox') as HTMLInputElement
@@ -35,7 +34,10 @@ function App() {
       if (e.target.checked) {
         csvColumnSetting.style.display = 'none';
       } else {
-        csvColumnSetting.style.display = '';
+        if(ColumnsNum > 0){
+          csvColumnSetting.style.display = '';
+        }
+        
       }
     }
   };
@@ -111,13 +113,15 @@ function App() {
                     <option value='sqlite'>SQLite</option>
                   </select>
                 </div>
+                <button> {t('convert')}</button>
               </div>
              
             </div>
             
           </div>
           
-          <p>SqlConverterProject 2024</p>
+          <p>SQL Tools<br/> Create by Dokokano Maeda</p>
+
         </div>
       </header>
     </div>
