@@ -50,6 +50,10 @@ const checkCsvColumns = (csvContent: string): void => {
         checkCsvColumns(result);
       }
     };
+    if(file != null){
+      reader.readAsText(file);
 
-    reader.readAsText(file);
+    }else{
+      ColumnsNum = 0;
+    }
   };
