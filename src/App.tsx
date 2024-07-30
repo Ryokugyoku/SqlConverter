@@ -66,6 +66,22 @@ function App() {
     }
   };
 
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const headerCheckbox = document.getElementById('HeaderCheckbox') as HTMLInputElement;
+    const tableName = document.getElementById('TableName') as HTMLInputElement;
+    if (!headerCheckbox.checked) {
+      if (csvColumnSettingRef.current) {
+        const inputs = csvColumnSettingRef.current.querySelectorAll('input');
+        const values = Array.from(inputs).map(input => input.value);
+        for (let i = 0; i < values.length; i++) {
+          console.log(values[i]); // 取得した文字列を表示
+        }
+      }
+    }
+    console.log(tableName.value); // 取得した文字列を表示
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -113,7 +129,7 @@ function App() {
                     <option value='sqlite'>SQLite</option>
                   </select>
                 </div>
-                <button> {t('convert')}</button>
+                <button onClick={handleSubmit}> {t('convert')}</button>
               </div>
              
             </div>
